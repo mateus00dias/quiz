@@ -1,4 +1,3 @@
-import React from "react";
 import React, {useState, useEffect} from 'react' ; 
 import {useNavigate} from 'react-router-dom';
 import './Styles.css';
@@ -9,25 +8,25 @@ function Game(){
 
     const navigate = useNavigate ; 
     const [currentQuestion, setCurrentQuestion] = useState(0);
-    const [quesrionSelected, setQuestionSelected] = useState([]);
+    const [questionsSelected, setQuestionsSelected] = useState([]);
     const [userAnswers, setUserAnswers] = useState([]);
 
     useEffect(() => {
-        if (quesrionSelected.length > 0)
+        if (questionsSelected.length > 0)
         return ; 
 
         const shuffledQuestions = shuffle(questions);
-        const setCurrentQuestion = shuffledQuestions.slice(0,5);
-        setQuestionSelected(selectedQuestion);
-        console.log(selectedQuestion); 
-    }, []);
+        const selectedQuestions = shuffledQuestions.slice(0,5);
+        setQuestionsSelected(selectedQuestions);
+        console.log(selectedQuestions); 
+    }, [questionsSelected]);
 
     return(
-        <div className="container">
+        <div className='container'>
             <img src ={LogoQuiz} alt ="Logo Quiz" className = "logo" /> 
             <div className = 'card'>
                 <div className = 'card-question'>
-                    <h2 className="card-title">  pergunta 1 de 5 </h2>
+                    <h2 className="card-title">  Pergunta 1 de 5 </h2>
                     <p className="question">Qual a melhor linguagem de programação ? </p>
                 </div>
 
