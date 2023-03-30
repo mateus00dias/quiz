@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import './Styles.css';
 import LogoQuiz from '../../assets/images/quiz.png'
+import Score from '../score';
 
 function Home(){
     const navigate = useNavigate();
