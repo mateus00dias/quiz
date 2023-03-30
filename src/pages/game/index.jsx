@@ -4,44 +4,48 @@ import './Styles.css';
 import LogoQuiz from '../../assets/images/quiz.png';
 import { questions, shuffle } from "../../database/questions";
 import Score from '../score';
+//import Spinner from 'reactjs-simple-spinner'
+
 
 function Game(){
 
-    const navigate = useNavigate ; 
-    const [currentQuestion, setCurrentQuestion] = useState(0);
-    const [questionsSelected, setQuestionsSelected] = useState([]);
-    const [userAnswers, setUserAnswers] = useState([]);
+    const navigate = useNavigate();
+    const [currentQuestion, setCurrentQuestion] =useState(0);
+    const [questionsSelected,setQuestionsSelected] =useState([]);
+    const [useAnswers, setUseAnswers] =useState([]);
     const [finish, setFinish] = useState(false);
-
+    
     useEffect(() => {
-        if (questionsSelected.length > 0)
-        return ; 
+        if(questionsSelected.length>0)
+        return;
 
         const shuffledQuestions = shuffle(questions);
         const selectedQuestions = shuffledQuestions.slice(0,5);
         setQuestionsSelected(selectedQuestions);
-        console.log(selectedQuestions); 
-    }, [questionsSelected]);
+        console.log(selectedQuestions);
 
-    function handleAnswer(selectedOptionIndex){
+      },[questionsSelected])
+
+      // Funçao chamada quando o usuario responde uma questao
+      function handleAnswer(selectedOptionIndex) {
         const currentQuestionData = questionsSelected[currentQuestion];
-        const userAnswer = currentQuestionData.answers[Number(selectedOptionIndex)];
-        setUserAnswers([...userAnswers, userAnswer]);
+        const useAnswer = currentQuestionData.answers[Number(selectedOptionIndex)];
+        setUseAnswers([...useAnswers, useAnswer]);
 
-        if(currentQuestionData<4){
-            setCurrentQuestion(currentQuestion + 1);
+        if(currentQuestion < 4){
+          setCurrentQuestion(currentQuestion + 1);
         }else{
-            setFinish(true);
+           setFinish(true);
         }
-       
-    }
-    const currentQuestionData = questionsSelected[currentQuestion];
-    if(finish){
-        const correctAnswer = useAnswers.filter(answer => answer.correct === true).length
-        return <Score score = {correctAnswer}/>
-    }
+      }
+      const currentQuestionData = questionsSelected[currentQuestion];
+      if(finish){
+        const correctAnswers = useAnswers.filter(answer => answer.correct === true).length;
+        return <Score score={correctAnswers}/>
+      }
 
-    return(
+return (
+    
         <div className='container'>
             <img src ={LogoQuiz} alt ="Logo Quiz" className = "logo" /> 
             <div className = 'card'>
